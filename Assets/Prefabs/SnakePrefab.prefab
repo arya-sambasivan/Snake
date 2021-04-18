@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 646175416705631901}
   - component: {fileID: 646175416705631888}
   - component: {fileID: 1554020550219112260}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SnakePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646175416705631890}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

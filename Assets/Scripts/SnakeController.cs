@@ -15,7 +15,7 @@ public class SnakeController : MonoBehaviour
     void Update()
     {
         CheckForInput();
-       // gameObject.transform.position += -transform.up *speed *  Time.deltaTime;
+        gameObject.transform.position += -transform.up *speed *  Time.deltaTime;
 
     }
     public void CheckForInput()
@@ -30,5 +30,17 @@ public class SnakeController : MonoBehaviour
         }
         
     }
-    
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("error");
+        if (col.gameObject.layer == 8)
+        {
+            //mirror reflection code
+           
+        }
+
+
+    }
+
+
 }

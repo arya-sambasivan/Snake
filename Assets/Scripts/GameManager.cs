@@ -34,6 +34,12 @@ public class GameManager : MonoBehaviour
                 Vector2 origin = new Vector2(0 - ((gridSizeX * width) / 2), 0 - ((gridSizeY * height) / 2));
                 cell.transform.position = origin+new Vector2(width*i,height*j);
                 cell.transform.parent = gridHolder.transform;
+                if(i==0 || i == gridSizeX-1 || j == 0 || j == gridSizeY - 1)
+                {
+                    cell.GetComponent<SpriteRenderer>().color = Color.black;
+                    cell.layer = 8;
+                }
+               
             }
         }
 
