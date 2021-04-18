@@ -38,6 +38,22 @@ public class GameManager : MonoBehaviour
                 {
                     cell.GetComponent<SpriteRenderer>().color = Color.black;
                     cell.layer = 8;
+                    if(i==0)
+                    {
+                        cell.GetComponent<CellHandler>().setWallNormal(Vector3.right);
+                    }
+                    else if(i==gridSizeX-1)
+                    {
+                        cell.GetComponent<CellHandler>().setWallNormal(Vector3.left);
+                    }
+                    else if (j == 0)
+                    {
+                        cell.GetComponent<CellHandler>().setWallNormal(Vector3.up);
+                    }
+                    else if (j == gridSizeY - 1)
+                    {
+                        cell.GetComponent<CellHandler>().setWallNormal(Vector3.down);
+                    }
                 }
                
             }

@@ -36,11 +36,23 @@ public class SnakeController : MonoBehaviour
         if (col.gameObject.layer == 8)
         {
             //mirror reflection code
+            Vector3 wallnormal = col.GetComponent<CellHandler>().getWallNormal();
+            transform.up = -bounce(wallnormal, -transform.up);
            
         }
 
 
     }
+
+     Vector3 bounce(Vector3 n, Vector3 v)
+    {
+        Vector3 tmp = (-2 * Vector3.Dot(n, v)) * n;
+        return tmp + v;
+    }
+
+
+
+
 
 
 }

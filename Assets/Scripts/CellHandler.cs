@@ -6,6 +6,7 @@ public class CellHandler : MonoBehaviour
 {
     BoxCollider2D colliderRef;
     SpriteRenderer cellRenderer;
+    Vector3 cellNormal;
     void Awake()
     {
         colliderRef = GetComponent<BoxCollider2D>();
@@ -29,5 +30,13 @@ public class CellHandler : MonoBehaviour
 
 
     }
-   
+    public Vector3 getWallNormal()
+    {
+        return cellNormal;
+    }
+    public void setWallNormal(Vector3 cellNorm)
+    {
+        cellNormal = cellNorm;
+    }
+
 }
