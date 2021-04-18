@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeAnimations : MonoBehaviour
+public class SnakeController : MonoBehaviour
 {
     public int speed = 1;
     public GameObject snakeModel;
@@ -15,11 +15,11 @@ public class SnakeAnimations : MonoBehaviour
     void Update()
     {
         CheckForInput();
-        gameObject.transform.position += snakeModel.transform.forward *speed *  Time.deltaTime;
+       // gameObject.transform.position += -transform.up *speed *  Time.deltaTime;
 
     }
     public void CheckForInput()
-    {
+    { 
         if(Input.GetKeyDown(KeyCode.A))
         {
             gameObject.transform.Rotate(new Vector3(0, 0, 45));

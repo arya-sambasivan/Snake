@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
     public int gridSizeY = 20;
     public GameObject Cellprefab;
     public GameObject gridHolder;
+    public SnakeController snakprefab;
     void Start()
     {
         ArrangeGrid();
+        SnakeController snakeObject = GameObject.Instantiate(snakprefab);
     }
 
     // Update is called once per frame
