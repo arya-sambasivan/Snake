@@ -270,6 +270,7 @@ MonoBehaviour:
   Cellprefab: {fileID: 3726748855060687477, guid: d7f22540ebcbcc445894ec27fdfc516a, type: 3}
   gridHolder: {fileID: 1300504379}
   snakprefab: {fileID: 646175416705631889, guid: 0059777d9d7fc8e4eb9f55f7410b9014, type: 3}
+  pizzaSlizePrefab: {fileID: 5531558887750016510, guid: 622682d4c1fef374589ca08f03e77ca1, type: 3}
 --- !u!4 &2132250107
 Transform:
   m_ObjectHideFlags: 0

@@ -5,11 +5,12 @@ using UnityEngine;
 public class SnakeController : MonoBehaviour
 {
     public int speed = 1;
-    public GameObject snakeModel;
+    GameManager gameManagerInstance;
+    //public GameObject snakeModel;
     
     void Start()
     {
-        //gameObject.transform.forward = Vector3.up;
+        gameManagerInstance = FindObjectOfType<GameManager>();
         
     }
 
@@ -34,7 +35,7 @@ public class SnakeController : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("error");
+        
         if (col.gameObject.layer == 8)
         {
             Vector3 wallnormal = col.GetComponent<CellHandler>().getWallNormal();
@@ -43,8 +44,11 @@ public class SnakeController : MonoBehaviour
             gameObject.transform.Rotate(new Vector3(0, 0, rotationAngle));
 
         }
-
-
+        if(col.gameObject.layer == 9)
+        {
+            Debug.Log("idichu");
+            gameManagerInstance.StartCoroutine(gameManagerInstance.reposPizzaObj(0,true));
+        }
     }
 
 

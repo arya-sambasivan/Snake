@@ -7,10 +7,12 @@ public class CellHandler : MonoBehaviour
     BoxCollider2D colliderRef;
     SpriteRenderer cellRenderer;
     Vector3 cellNormal;
+    GameManager gameManagerInstance;
     void Awake()
     {
         colliderRef = GetComponent<BoxCollider2D>();
         cellRenderer = GetComponent<SpriteRenderer>();
+        gameManagerInstance = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame   
@@ -26,10 +28,12 @@ public class CellHandler : MonoBehaviour
             Debug.Log("error");
             colliderRef.enabled = false;
             cellRenderer.color = Color.green;
+            gameManagerInstance.removeCell(gameObject);
         }
 
 
     }
+
     public Vector3 getWallNormal()
     {
         //return Vector3.up;
