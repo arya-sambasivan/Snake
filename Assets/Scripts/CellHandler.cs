@@ -32,6 +32,7 @@ public class CellHandler : MonoBehaviour
     }
     public Vector3 getWallNormal()
     {
+        //return Vector3.up;
         return cellNormal;
     }
     public void setWallNormal(Vector3 cellNorm)

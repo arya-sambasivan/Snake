@@ -6,9 +6,11 @@ public class SnakeController : MonoBehaviour
 {
     public int speed = 1;
     public GameObject snakeModel;
+    
     void Start()
     {
         //gameObject.transform.forward = Vector3.up;
+        
     }
 
     // Update is called once per frame
@@ -35,19 +37,14 @@ public class SnakeController : MonoBehaviour
         Debug.Log("error");
         if (col.gameObject.layer == 8)
         {
-            //mirror reflection code
             Vector3 wallnormal = col.GetComponent<CellHandler>().getWallNormal();
-            transform.up = -bounce(wallnormal, -transform.up);
-           
+            float angle = Vector3.SignedAngle(wallnormal, -transform.up,Vector3.forward);
+            float rotationAngle = 180 - (2 * angle);
+            gameObject.transform.Rotate(new Vector3(0, 0, rotationAngle));
+
         }
 
 
-    }
-
-     Vector3 bounce(Vector3 n, Vector3 v)
-    {
-        Vector3 tmp = (-2 * Vector3.Dot(n, v)) * n;
-        return tmp + v;
     }
 
 
