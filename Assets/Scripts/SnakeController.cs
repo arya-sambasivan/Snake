@@ -48,6 +48,7 @@ public class SnakeController : MonoBehaviour
         {
             Debug.Log("idichu");
             gameManagerInstance.StartCoroutine(gameManagerInstance.reposPizzaObj(0,true));
+            gameManagerInstance.UpdateScore();
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     List<GameObject> cellList = new List<GameObject>();
     [SerializeField] float excecutionTimeDelay = 2;
     IEnumerator coroutineForPizza;
+    [SerializeField] Text scoreText;
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
         coroutineForPizza = reposPizzaObj(0);
         StartCoroutine(coroutineForPizza);
         SnakeController snakeObject = GameObject.Instantiate(snakprefab);
+        scoreText.text = "0";
         
 
     }
@@ -115,5 +118,8 @@ public class GameManager : MonoBehaviour
             // GAME OVER>>>>>>>>>
         }
     }
-    
+    public void UpdateScore()
+    {
+        scoreText.text = System.Convert.ToString(int.Parse(scoreText.text) + 1);
+    }
 }
