@@ -6,7 +6,6 @@ public class SnakeController : MonoBehaviour
 {
     public int speed = 1;
     GameManager gameManagerInstance;
-    //public GameObject snakeModel;
     
     void Start()
     {
@@ -14,11 +13,15 @@ public class SnakeController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        CheckForInput();
-        gameObject.transform.position += -transform.up *speed *  Time.deltaTime;
+        if (Time.timeScale != 0f)
+        {
+            CheckForInput();
+
+            gameObject.transform.position += -transform.up * speed * Time.deltaTime;
+
+        }
 
     }
     public void CheckForInput()
@@ -46,7 +49,7 @@ public class SnakeController : MonoBehaviour
         }
         if(col.gameObject.layer == 9)
         {
-            Debug.Log("idichu");
+           
             gameManagerInstance.StartCoroutine(gameManagerInstance.reposPizzaObj(0,true));
             gameManagerInstance.UpdateScore();
         }

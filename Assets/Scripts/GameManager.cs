@@ -3,21 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum GameStatus
+{
+    STARTED = 0,
+    PAUSED,
+    GAMEPLAY,
+    END
+};
 public class GameManager : MonoBehaviour
 {
     public int gridSizeX = 20;
     public int gridSizeY = 20;
-    public GameObject Cellprefab;
-    public GameObject gridHolder;
-    public SnakeController snakprefab;
+    [SerializeField] GameObject Cellprefab;
+    [SerializeField] GameObject gridHolder;
+    [SerializeField] SnakeController snakprefab;
     [SerializeField]GameObject pizzaSlizePrefab;
     GameObject pizzaSliceObject;
     List<GameObject> cellList = new List<GameObject>();
     [SerializeField] float excecutionTimeDelay = 2;
     IEnumerator coroutineForPizza;
     [SerializeField] Text scoreText;
+    [SerializeField] Button gameStateButton;
+    [SerializeField] GameObject gameEndUI;
+
+    GameStatus currentGameStatus = GameStatus.STARTED;
 
     void Start()
+    {
+        FindObjectOfType<Canvas>().enabled = true;
+    }
+    public void StartGame()
     {
         ArrangeGrid();
         pizzaSliceObject = GameObject.Instantiate(pizzaSlizePrefab);
@@ -25,11 +40,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coroutineForPizza);
         SnakeController snakeObject = GameObject.Instantiate(snakprefab);
         scoreText.text = "0";
-        
-
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -85,9 +97,16 @@ public class GameManager : MonoBehaviour
         if (cellList.Contains(obj))
         {
             cellList.Remove(obj);
+            if(pizzaSliceObject.transform.position == obj.transform.position)
+            {
+                coroutineForPizza = reposPizzaObj(excecutionTimeDelay,true);
+                StartCoroutine(coroutineForPizza);
+            }
             if(cellList.Count == 0)
             {
                 GameObject.Destroy(pizzaSliceObject);
+                coroutineForPizza = reposPizzaObj(excecutionTimeDelay,true);
+                StartCoroutine(coroutineForPizza);
             }
         }
 
@@ -95,31 +114,43 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator reposPizzaObj(float pizzaTime,bool forceChange = false)
     {
-        Debug.Log("keriiiii");
+        
         if (cellList.Count>0)
         {
             int rand = Random.Range(0, cellList.Count);
             pizzaSliceObject.transform.position = cellList[rand].transform.position;
-            Debug.Log("veendum keriiiilllllllaaaaaaaaa");
+            
             if(forceChange)
             {
                 StopCoroutine(coroutineForPizza);
             }
             yield return new WaitForSeconds(pizzaTime);
-            Debug.Log("veendum keriiii");
-            //StopCoroutine(coroutineForPizza);
             coroutineForPizza = reposPizzaObj(excecutionTimeDelay);
             StartCoroutine(coroutineForPizza);
         }
         else
         {
-            GameObject.Destroy(pizzaSliceObject);
-            yield return new WaitForSeconds(0);
             // GAME OVER>>>>>>>>>
+
+            GameObject.Destroy(pizzaSliceObject);
+            gameEndUI.SetActive(true);
+            currentGameStatus = GameStatus.END;
+            gameStateButton.transform.Find("Text").GetComponent<Text>().text = "";
+            yield return new WaitForSeconds(0);
+
         }
     }
     public void UpdateScore()
     {
         scoreText.text = System.Convert.ToString(int.Parse(scoreText.text) + 1);
+    }
+
+    public void setCurrentGameState(GameStatus status)
+    {
+        currentGameStatus = status;
+    }
+    public GameStatus getCurrentGameStatus()
+    {
+        return currentGameStatus;
     }
 }

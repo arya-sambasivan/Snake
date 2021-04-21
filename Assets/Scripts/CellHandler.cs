@@ -15,17 +15,15 @@ public class CellHandler : MonoBehaviour
         gameManagerInstance = FindObjectOfType<GameManager>();
     }
 
-    // Update is called once per frame   
     void Update()
     {
        
     }
     public void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("error");
+     
         if(col.gameObject.layer == 6 && gameObject.layer !=8)
         {
-            Debug.Log("error");
             colliderRef.enabled = false;
             cellRenderer.color = Color.green;
             gameManagerInstance.removeCell(gameObject);
@@ -36,7 +34,6 @@ public class CellHandler : MonoBehaviour
 
     public Vector3 getWallNormal()
     {
-        //return Vector3.up;
         return cellNormal;
     }
     public void setWallNormal(Vector3 cellNorm)
