@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text scoreText;
     [SerializeField] Button gameStateButton;
     [SerializeField] GameObject gameEndUI;
+    public GameObject ControllerObject;
 
     GameStatus currentGameStatus = GameStatus.STARTED;
 
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coroutineForPizza);
         SnakeController snakeObject = GameObject.Instantiate(snakprefab);
         scoreText.text = "0";
+        ControllerObject.transform.parent.gameObject.SetActive(true);
     }
 
     void Update()
@@ -130,7 +132,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // GAME OVER>>>>>>>>>
+            // GAME OVER
 
             GameObject.Destroy(pizzaSliceObject);
             gameEndUI.SetActive(true);
@@ -148,9 +150,21 @@ public class GameManager : MonoBehaviour
     public void setCurrentGameState(GameStatus status)
     {
         currentGameStatus = status;
+        setControlWheelVisibility();
     }
     public GameStatus getCurrentGameStatus()
     {
         return currentGameStatus;
+    }
+    private void setControlWheelVisibility()
+    {
+        if(currentGameStatus==GameStatus.PAUSED || currentGameStatus == GameStatus.END)
+        {
+            ControllerObject.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            ControllerObject.transform.parent.gameObject.SetActive(true);
+        }
     }
 }

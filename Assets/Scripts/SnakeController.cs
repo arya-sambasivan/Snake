@@ -15,25 +15,18 @@ public class SnakeController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale != 0f)
-        {
-            CheckForInput();
+        
+        CheckForInput();
 
-            gameObject.transform.position += -transform.up * speed * Time.deltaTime;
-
-        }
+        gameObject.transform.position += -transform.up * speed * Time.deltaTime;
 
     }
     public void CheckForInput()
-    { 
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            gameObject.transform.Rotate(new Vector3(0, 0, 45));
-        }
-        else if(Input.GetKeyDown(KeyCode.D))
-        {
-            gameObject.transform.Rotate(new Vector3(0, 0, -45));
-        }
+    {
+        float rotationAngle = gameManagerInstance.ControllerObject.GetComponent<SnakeDirectionController>().OutPut;
+        
+        gameObject.transform.Rotate(new Vector3(0, 0, -rotationAngle));
+       
         
     }
     public void OnTriggerEnter2D(Collider2D col)
